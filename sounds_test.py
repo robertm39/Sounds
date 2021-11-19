@@ -99,14 +99,14 @@ def harmonic_series_test():
     
     sound1 = sine_wave.get_harmonic_series(config, base, amplitudes)
     sound2 = sound1 + sine_wave.get_harmonic_series(config, base*7/6, amplitudes)
-    sound3 = sound1 + sine_wave.get_harmonic_series(config, base*3/2, amplitudes)
+    sound3 = sound1 + sine_wave.get_harmonic_series(config, base*6/5, amplitudes)
     sound4 = sound1 + sine_wave.get_harmonic_series(config, base*7/4, amplitudes)
     sound5 = sound1 + sine_wave.get_harmonic_series(config, base*9/5, amplitudes)
     # sound4 = sine_wave.get_harmonic_series(config, base*7/4, amplitudes)
     # sound5 = sine_wave.get_harmonic_series(config, base*2, amplitudes)
     
     # wave = [sound1, sound2, sound3, sound4, sound3, sound2]
-    wave = [sound2, sound2, sound4, sound5]
+    wave = [sound2, sound3, sound4, sound5]
     # end = [sound1] * 4
     
     sound = np.concatenate(wave * 20, axis=0)
