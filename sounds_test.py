@@ -11,6 +11,7 @@ import numpy as np
 import wavio
 
 import sine_wave
+import sounds
     
 DIR = 'C:\\Users\\rober\\.spyder-py3\\Robert_Python\\Sounds'
 
@@ -114,12 +115,49 @@ def harmonic_series_test():
     filename = os.path.join(DIR, 'series.wav')
     wavio.write(filename, sound, rate, sampwidth=sample_width)
 
+def func_test():
+    # wave = sounds.get_sine(440)
+    # wave = sounds.get_triangle(440, num_harmonics=10)
+    
+    freq = 440
+    # harmons = [1, 1/4, 1/9, 1/16, 1/25, 1/36]
+    # harmons = [1, 4, 6, 4, 1]
+    # harmons = list(range(4, 0, -1))
+    
+    harmons = list(range(10, 0, -1))
+    
+    sound = lambda freq: sounds.harmonic_series(freq, harmons)
+    # sound = lambda freq: sounds.sine(freq)
+    
+    wave1 = sound(freq)
+    
+    # Make these start a bit later
+    wave2 = sound(freq * (7/6))
+    # wave2 = wave2 * sounds.interval_envelope(0, 3)
+    # wave2 = sounds.delayed(wave2, 0.1)
+    
+    wave3 = sound(freq * (3/2))
+    # wave3 = wave3 * sounds.interval_envelope(0, 3)
+    # wave3 = sounds.delayed(wave3, 0.2)
+    
+    
+    wave = wave1 + wave2 + wave3
+    
+    # env = sounds.get_normal_envelope(1, 0.05)
+    hard_env = sounds.interval_envelope(0, 2)
+    env = sounds.exponential_envelope(0, 15)
+    sound = wave * env * hard_env
+    
+    filename = os.path.join(DIR, 'note.wav')
+    sound.save(filename, 0, 2)
+
 def main():
     # times_test()
     # sine_test()
     # sine_wav_test()
     # sum_of_sines_test()
-    harmonic_series_test()
+    # harmonic_series_test()
+    func_test()
 
 if __name__ == '__main__':
     main()
