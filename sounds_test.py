@@ -50,7 +50,12 @@ def sine_wav_test():
                                     amplitude=amplitude,
                                     offset=0)
     
-    sine = sine1 + sine2
+    sine3 = sine_wave.get_sine_wave(config,
+                                    frequency=freq*3,
+                                    amplitude=amplitude,
+                                    offset=0)
+    
+    sine = sine1 + sine2 + sine3
     
     filename = os.path.join(DIR, 'sine.wav')
     wavio.write(filename, sine, rate, sampwidth=width)
@@ -155,9 +160,9 @@ def main():
     # times_test()
     # sine_test()
     # sine_wav_test()
-    # sum_of_sines_test()
+    sum_of_sines_test()
     # harmonic_series_test()
-    func_test()
+    # func_test()
 
 if __name__ == '__main__':
     main()
