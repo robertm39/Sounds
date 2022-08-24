@@ -197,6 +197,19 @@ def harmonic_series(frequency, amplitudes):
     
     return sum(waves)
 
+def sum_of_sines(amps_from_freqs):
+    waves = list()
+    for freq, amp in amps_from_freqs.items():
+        if amp == 0:
+            continue
+        
+        wave = sine(freq) * amp
+        
+        waves.append(wave)
+    
+    return sum(waves)
+        
+
 #################
 #               #
 #   Envelopes   #
@@ -240,7 +253,7 @@ def interval_envelope(start, stop):
     """
     return FuncSound(lambda time: 1 if start <= time <= stop else 0)
 
-def exponential_envelope(start, decay):
+def exponential_envelope(start, decay, before_decay=0):
     """
     Return an exponential decay envelope.
     
@@ -254,7 +267,7 @@ def exponential_envelope(start, decay):
     Return:
         An exponential decay envelope with the given start and decay rate.
     """
-    return FuncSound(lambda time: 0 if time < start else\
+    return FuncSound(lambda time: before_decay if time < start else\
                      np.exp((time - start) * -decay))
 
 
